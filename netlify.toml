@@ -1,0 +1,39 @@
+# Netlify Build Configuration for Vani Dialer App
+# https://docs.netlify.com/configure-builds/file-based-configuration/
+
+[build]
+  publish = "dist"
+  command = "npm run build"
+
+# Environment variables for the build
+[build.environment]
+  VITE_API_BASE_URL = "https://vani.codevamp.tech"
+
+# SPA redirect — all routes go to index.html
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+# Cache the audio worklets (they don't change often)
+[[headers]]
+  for = "/audio-worklet-processor.js"
+  [headers.values]
+    Cache-Control = "public, max-age=3600"
+
+[[headers]]
+  for = "/playback-worklet-processor.js"
+  [headers.values]
+    Cache-Control = "public, max-age=3600"
+
+# Security headers for the app
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    # Allow SharedArrayBuffer for AudioWorklet (needed for some browsers)
+    Cross-Origin-Opener-Policy = "same-origin"
+    Cross-Origin-Embedder-Policy = "require-corp"
