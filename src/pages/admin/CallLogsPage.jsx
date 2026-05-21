@@ -53,7 +53,7 @@ export default function CallLogsPage() {
   return (
     <div className="flex-1 overflow-auto bg-background/50 relative">
       <div className="absolute inset-0 bg-grid opacity-15 pointer-events-none" />
-      <div className="p-8 relative z-10 max-w-7xl mx-auto">
+      <div className="p-4 md:p-8 relative z-10 max-w-7xl mx-auto">
         {/* Header */}
         <div className="mb-6">
           <h1 className="text-3xl font-extrabold text-foreground tracking-tight">Call Logs</h1>
@@ -63,8 +63,8 @@ export default function CallLogsPage() {
         </div>
 
         {/* Filters */}
-        <div className="flex items-center gap-3 mb-6">
-          <form onSubmit={handleSearch} className="relative flex-1 max-w-md">
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 mb-6">
+          <form onSubmit={handleSearch} className="relative flex-1 w-full sm:max-w-md">
             <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
             <input
               id="input-search-calls"
@@ -79,7 +79,7 @@ export default function CallLogsPage() {
             id="filter-status"
             value={statusFilter}
             onChange={(e) => { setStatusFilter(e.target.value); setPage(1); }}
-            className="bg-card border border-border px-4 py-2.5 rounded-xl outline-none focus:border-primary text-foreground text-sm font-medium"
+            className="w-full sm:w-auto bg-card border border-border px-4 py-2.5 rounded-xl outline-none focus:border-primary text-foreground text-sm font-medium"
           >
             <option value="">All Status</option>
             <option value="completed">Completed</option>

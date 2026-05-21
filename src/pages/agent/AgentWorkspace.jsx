@@ -138,13 +138,13 @@ export default function AgentWorkspace() {
   return (
     <div className="flex flex-col h-full bg-background overflow-hidden">
       {/* ─── Top Control & Status Bar ────────────────────── */}
-      <div className="h-16 border-b border-border bg-card/40 backdrop-blur-md flex items-center px-6 gap-6 z-20 shrink-0">
+      <div className="h-auto md:h-16 border-b border-border bg-card/40 backdrop-blur-md flex flex-wrap md:flex-nowrap items-center px-4 md:px-6 py-3 md:py-0 gap-4 md:gap-6 z-20 shrink-0">
         {/* SIP Selector */}
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-3 flex-1 md:flex-initial min-w-[150px]">
           <div className="p-2 rounded-lg bg-primary/10 text-primary">
             <Phone className="w-4 h-4" />
           </div>
-          <div className="min-w-[200px]">
+          <div className="flex-1 md:min-w-[180px]">
             <select
               value={selectedPhoneNumberId}
               onChange={(e) => setSelectedPhoneNumberId(e.target.value)}
@@ -159,25 +159,25 @@ export default function AgentWorkspace() {
           </div>
         </div>
 
-        <div className="h-8 w-px bg-border" />
+        <div className="hidden md:block h-8 w-px bg-border" />
 
         {/* Mode Toggle */}
         <div className="flex p-1 bg-muted/50 rounded-xl">
           <button 
             onClick={() => setMode('campaign')} 
-            className={`px-4 py-1.5 rounded-lg text-xs font-bold transition-all ${mode === 'campaign' ? 'bg-card shadow-sm text-foreground' : 'text-muted-foreground hover:text-foreground'}`}
+            className={`px-3 md:px-4 py-1.5 rounded-lg text-xs font-bold transition-all ${mode === 'campaign' ? 'bg-card shadow-sm text-foreground' : 'text-muted-foreground hover:text-foreground'}`}
           >
             Campaign
           </button>
           <button 
             onClick={() => setMode('manual')} 
-            className={`px-4 py-1.5 rounded-lg text-xs font-bold transition-all ${mode === 'manual' ? 'bg-card shadow-sm text-foreground' : 'text-muted-foreground hover:text-foreground'}`}
+            className={`px-3 md:px-4 py-1.5 rounded-lg text-xs font-bold transition-all ${mode === 'manual' ? 'bg-card shadow-sm text-foreground' : 'text-muted-foreground hover:text-foreground'}`}
           >
             Quick Dial
           </button>
         </div>
 
-        <div className="h-8 w-px bg-border" />
+        <div className="hidden md:block h-8 w-px bg-border" />
 
         {/* Agent Status */}
         <div className="flex items-center gap-2">
@@ -221,12 +221,12 @@ export default function AgentWorkspace() {
       </div>
 
       {/* ─── Main Grid Layout ────────────────────────────── */}
-      <div className="flex-1 flex overflow-hidden p-6 gap-6 relative">
+      <div className="flex-1 flex flex-col lg:flex-row overflow-y-auto lg:overflow-hidden p-4 md:p-6 gap-4 md:gap-6 relative">
         <div className="absolute inset-0 bg-grid opacity-5 pointer-events-none" />
 
         {/* Column 1: Script & Info (Left) */}
-        <div className="w-[350px] flex flex-col gap-6 z-10 animate-slide-in-right">
-          <div className="flex-1 bg-card/60 backdrop-blur border border-border rounded-3xl overflow-hidden flex flex-col shadow-xl shadow-primary/5">
+        <div className="w-full lg:w-[350px] flex flex-col gap-4 md:gap-6 z-10 order-2 lg:order-1 animate-slide-in-right">
+          <div className="min-h-[250px] lg:flex-1 bg-card/60 backdrop-blur border border-border rounded-3xl overflow-hidden flex flex-col shadow-xl shadow-primary/5">
             <div className="px-6 py-4 border-b border-border bg-muted/20 flex items-center justify-between">
               <div className="flex items-center gap-2">
                 <FileText className="w-4 h-4 text-primary" />
@@ -234,7 +234,7 @@ export default function AgentWorkspace() {
               </div>
               {activeLead && <Badge variant="primary" className="animate-pulse">Active</Badge>}
             </div>
-            <div className="flex-1 p-6 overflow-y-auto scrollbar-thin">
+            <div className="flex-1 p-4 md:p-6 overflow-y-auto scrollbar-thin">
               {activeCampaign ? (
                 <div className="space-y-4">
                   {renderScript().split('\n').map((p, i) => (
@@ -242,7 +242,7 @@ export default function AgentWorkspace() {
                   ))}
                 </div>
               ) : (
-                <div className="h-full flex flex-col items-center justify-center text-center opacity-40">
+                <div className="h-full flex flex-col items-center justify-center text-center opacity-40 py-8">
                   <FileText className="w-12 h-12 mb-4" />
                   <p className="text-sm font-medium">No campaign selected</p>
                 </div>
@@ -252,7 +252,7 @@ export default function AgentWorkspace() {
 
           {/* Lead Details mini-card */}
           {activeLead && (
-            <div className="bg-card/60 backdrop-blur border border-border rounded-3xl p-6 shadow-xl shadow-primary/5">
+            <div className="bg-card/60 backdrop-blur border border-border rounded-3xl p-4 md:p-6 shadow-xl shadow-primary/5">
               <div className="flex items-center gap-4 mb-4">
                 <div className="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center text-primary font-bold text-xl">
                   {activeLead.name?.charAt(0) || <User className="w-5 h-5" />}
@@ -277,28 +277,28 @@ export default function AgentWorkspace() {
         </div>
 
         {/* Column 2: The Stage (Center) */}
-        <div className="flex-1 flex flex-col items-center justify-center z-10 relative">
+        <div className="flex-1 flex flex-col items-center justify-center z-10 relative order-1 lg:order-2 w-full">
           
           {activeLead && manualCall.status === 'ended' ? (
             /* Disposition Stage */
-            <div className="w-full max-w-xl bg-card border border-border rounded-[40px] p-10 shadow-2xl animate-slide-in-up">
-              <div className="flex items-center gap-4 mb-8">
-                <div className="w-14 h-14 rounded-2xl bg-green-500/10 text-green-500 flex items-center justify-center">
-                  <CheckCircle className="w-8 h-8" />
+            <div className="w-full max-w-xl bg-card border border-border rounded-2xl md:rounded-[40px] p-5 md:p-10 shadow-2xl animate-slide-in-up">
+              <div className="flex items-center gap-4 mb-6 md:mb-8">
+                <div className="w-12 h-12 md:w-14 md:h-14 rounded-2xl bg-green-500/10 text-green-500 flex items-center justify-center">
+                  <CheckCircle className="w-6 h-6 md:w-8 md:h-8" />
                 </div>
                 <div>
-                  <h2 className="text-2xl font-black tracking-tight">Call Result</h2>
-                  <p className="text-muted-foreground">Select an outcome for this interaction</p>
+                  <h2 className="text-xl md:text-2xl font-black tracking-tight">Call Result</h2>
+                  <p className="text-xs md:text-sm text-muted-foreground">Select an outcome for this interaction</p>
                 </div>
               </div>
 
-              <div className="space-y-6">
-                <div className="grid grid-cols-2 gap-3">
+              <div className="space-y-4 md:space-y-6">
+                <div className="grid grid-cols-2 gap-2 md:gap-3">
                   {['Interested', 'Call Back', 'No Answer', 'Wrong Number', 'Not Interested', 'DND'].map(opt => (
                     <button
                       key={opt}
                       onClick={() => setOutcome(opt)}
-                      className={`py-3 px-4 rounded-2xl text-sm font-bold border-2 transition-all ${
+                      className={`py-2.5 px-3 md:py-3 md:px-4 rounded-xl md:rounded-2xl text-xs md:text-sm font-bold border-2 transition-all ${
                         outcome === opt 
                           ? 'border-primary bg-primary/5 text-primary shadow-lg shadow-primary/10 scale-[1.02]' 
                           : 'border-border bg-muted/10 hover:border-border/50 text-muted-foreground'
@@ -330,7 +330,7 @@ export default function AgentWorkspace() {
                   value={notes}
                   onChange={(e) => setNotes(e.target.value)}
                   placeholder="Additional notes about the call..."
-                  className="w-full h-32 bg-muted/20 border border-border rounded-2xl p-4 text-sm outline-none focus:border-primary/50 focus:ring-4 focus:ring-primary/5 transition-all resize-none"
+                  className="w-full h-24 md:h-32 bg-muted/20 border border-border rounded-xl md:rounded-2xl p-4 text-sm outline-none focus:border-primary/50 focus:ring-4 focus:ring-primary/5 transition-all resize-none"
                 />
 
                 {/* Auto-next countdown */}
@@ -348,17 +348,17 @@ export default function AgentWorkspace() {
                   </div>
                 )}
 
-                <div className="flex gap-4">
+                <div className="flex gap-3 md:gap-4">
                   <button
                     onClick={handleSkip}
-                    className="flex-1 py-4 bg-muted hover:bg-muted/80 text-foreground font-bold rounded-2xl transition-all flex items-center justify-center gap-2"
+                    className="flex-1 py-3 md:py-4 bg-muted hover:bg-muted/80 text-foreground font-bold rounded-xl md:rounded-2xl transition-all flex items-center justify-center gap-2"
                   >
                     <SkipForward className="w-4 h-4" /> Skip
                   </button>
                   <button
                     onClick={handleDisposition}
                     disabled={submitting || autoNextCountdown !== null}
-                    className="flex-[2] py-4 bg-primary text-white font-black rounded-2xl shadow-xl shadow-primary/30 hover:opacity-90 transition-all flex items-center justify-center gap-2 disabled:opacity-60"
+                    className="flex-[2] py-3 md:py-4 bg-primary text-white font-black rounded-xl md:rounded-2xl shadow-xl shadow-primary/30 hover:opacity-90 transition-all flex items-center justify-center gap-2 disabled:opacity-60"
                   >
                     {submitting ? <Spinner size="sm" className="border-white/20 border-t-white" /> : <CheckCircle className="w-5 h-5" />}
                     Save & Next
@@ -386,19 +386,19 @@ export default function AgentWorkspace() {
           ) : (
             /* Idle Stage / Dialer */
             <div className="w-full max-w-lg animate-slide-in-up">
-              <div className="bg-card border border-border rounded-[40px] p-10 shadow-2xl relative overflow-hidden group">
+              <div className="bg-card border border-border rounded-2xl md:rounded-[40px] p-5 md:p-10 shadow-2xl relative overflow-hidden group">
                 <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 blur-3xl -mr-10 -mt-10 group-hover:bg-primary/10 transition-colors" />
                 
                 {mode === 'campaign' ? (
-                  <div className="text-center space-y-8">
-                    <div className="flex flex-col items-center gap-4">
-                      <div className="w-20 h-20 rounded-3xl bg-primary/10 text-primary flex items-center justify-center relative">
-                        <Phone className="w-10 h-10" />
-                        <div className="absolute -bottom-1 -right-1 w-6 h-6 rounded-full bg-green-500 border-4 border-card" />
+                  <div className="text-center space-y-6 md:space-y-8">
+                    <div className="flex flex-col items-center gap-3 md:gap-4">
+                      <div className="w-16 h-16 md:w-20 md:h-20 rounded-2xl md:rounded-3xl bg-primary/10 text-primary flex items-center justify-center relative">
+                        <Phone className="w-8 h-8 md:w-10 md:h-10" />
+                        <div className="absolute -bottom-0.5 -right-0.5 md:-bottom-1 md:-right-1 w-5 h-5 md:w-6 md:h-6 rounded-full bg-green-500 border-4 border-card" />
                       </div>
                       <div>
-                        <h2 className="text-3xl font-black tracking-tighter">Ready to Call?</h2>
-                        <p className="text-muted-foreground mt-1">
+                        <h2 className="text-2xl md:text-3xl font-black tracking-tighter">Ready to Call?</h2>
+                        <p className="text-xs md:text-sm text-muted-foreground mt-1">
                           {activeCampaign 
                             ? `Queue active for "${activeCampaign.name}"` 
                             : 'Select a campaign to begin the queue'}
@@ -407,7 +407,7 @@ export default function AgentWorkspace() {
                     </div>
 
                     {!activeCampaign ? (
-                      <div className="p-6 bg-muted/30 rounded-3xl border border-dashed border-border text-sm font-medium">
+                      <div className="p-4 md:p-6 bg-muted/30 rounded-2xl md:rounded-3xl border border-dashed border-border text-sm font-medium">
                         <select
                           value={activeCampaign?._id || ''}
                           onChange={(e) => setActiveCampaign(campaigns.find(c => c._id === e.target.value))}
@@ -423,23 +423,23 @@ export default function AgentWorkspace() {
                       <button
                         onClick={handlePullNext}
                         disabled={pulling || agentStatus !== 'Available' || !selectedPhoneNumberId}
-                        className="w-full py-6 bg-primary text-white font-black text-xl rounded-3xl shadow-2xl shadow-primary/30 hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center justify-center gap-3 disabled:opacity-50 disabled:cursor-not-allowed"
+                        className="w-full py-4 md:py-6 bg-primary text-white font-black text-lg md:text-xl rounded-2xl md:rounded-3xl shadow-2xl shadow-primary/30 hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center justify-center gap-3 disabled:opacity-50 disabled:cursor-not-allowed"
                       >
-                        {pulling ? <Spinner size="md" className="border-white/20 border-t-white" /> : <Activity className="w-6 h-6 animate-pulse" />}
+                        {pulling ? <Spinner size="md" className="border-white/20 border-t-white" /> : <Activity className="w-5 h-5 md:w-6 md:h-6 animate-pulse" />}
                         {pulling ? 'Pulling Lead...' : 'Start Next Call'}
                       </button>
                     )}
                     
-                    <p className="text-xs text-muted-foreground font-medium">
+                    <p className="text-[10px] md:text-xs text-muted-foreground font-medium">
                       {agentStatus !== 'Available' ? '⚠️ Set status to Available to start' : !selectedPhoneNumberId ? '⚠️ Select a SIP Line first' : 'Auto-pulling lead from queue'}
                     </p>
                   </div>
                 ) : (
                   /* Quick Dial Pad Aesthetic */
-                  <div className="space-y-8">
+                  <div className="space-y-6 md:space-y-8">
                     <div className="text-center">
-                      <h2 className="text-2xl font-black tracking-tight">Quick Dial</h2>
-                      <p className="text-sm text-muted-foreground">Enter number in E.164 format</p>
+                      <h2 className="text-xl md:text-2xl font-black tracking-tight">Quick Dial</h2>
+                      <p className="text-xs md:text-sm text-muted-foreground">Enter number in E.164 format</p>
                     </div>
 
                     <div className="relative">
@@ -448,7 +448,7 @@ export default function AgentWorkspace() {
                         value={manualPhone}
                         onChange={e => setManualPhone(e.target.value)}
                         placeholder="+91"
-                        className="w-full bg-muted/20 border-2 border-border rounded-2xl py-6 px-6 text-2xl font-black tracking-widest text-center focus:border-primary focus:ring-4 focus:ring-primary/5 transition-all outline-none"
+                        className="w-full bg-muted/20 border-2 border-border rounded-2xl py-4 px-4 text-xl md:py-6 md:px-6 md:text-2xl font-black tracking-widest text-center focus:border-primary focus:ring-4 focus:ring-primary/5 transition-all outline-none"
                       />
                       <div className="absolute inset-y-0 right-4 flex items-center">
                         <div className="p-2 rounded-lg bg-primary/10 text-primary">
@@ -460,9 +460,9 @@ export default function AgentWorkspace() {
                     <button
                       onClick={handleManualCall}
                       disabled={!selectedPhoneNumberId || agentStatus !== 'Available'}
-                      className="w-full py-6 bg-primary text-white font-black text-xl rounded-3xl shadow-2xl shadow-primary/30 hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center justify-center gap-3 disabled:opacity-50"
+                      className="w-full py-4 md:py-6 bg-primary text-white font-black text-lg md:text-xl rounded-2xl md:rounded-3xl shadow-2xl shadow-primary/30 hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center justify-center gap-3 disabled:opacity-50"
                     >
-                      <Phone className="w-6 h-6" />
+                      <Phone className="w-5 h-5 md:w-6 md:h-6" />
                       Call Number
                     </button>
                   </div>
@@ -473,9 +473,9 @@ export default function AgentWorkspace() {
         </div>
 
         {/* Column 3: Recent Activity (Right) */}
-        <div className="w-[300px] flex flex-col gap-6 z-10 animate-slide-in-right delay-75">
+        <div className="w-full lg:w-[300px] flex flex-col gap-4 md:gap-6 z-10 order-3 lg:order-3 animate-slide-in-right delay-75">
           {/* Recent Calls */}
-          <div className="flex-1 bg-card/60 backdrop-blur border border-border rounded-3xl overflow-hidden flex flex-col shadow-xl shadow-primary/5">
+          <div className="min-h-[250px] lg:flex-1 bg-card/60 backdrop-blur border border-border rounded-3xl overflow-hidden flex flex-col shadow-xl shadow-primary/5">
             <div className="px-6 py-4 border-b border-border bg-muted/20 flex items-center gap-2">
               <History className="w-4 h-4 text-primary" />
               <span className="font-bold text-sm">Recent Calls</span>
@@ -509,7 +509,7 @@ export default function AgentWorkspace() {
           </div>
 
           {/* Performance Mini-Stats */}
-          <div className="bg-primary/5 border border-primary/10 rounded-3xl p-6">
+          <div className="bg-primary/5 border border-primary/10 rounded-3xl p-4 md:p-6">
             <div className="flex items-center gap-2 mb-4">
               <Settings className="w-4 h-4 text-primary" />
               <span className="font-bold text-sm text-primary">Session Stats</span>

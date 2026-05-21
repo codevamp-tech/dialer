@@ -10,9 +10,9 @@ export default function SettingsPage() {
   return (
     <div className="flex-1 overflow-auto bg-background/50 relative">
       <div className="absolute inset-0 bg-grid opacity-15 pointer-events-none" />
-      <div className="p-8 relative z-10 max-w-3xl mx-auto">
+      <div className="p-4 md:p-8 relative z-10 max-w-3xl mx-auto">
         {/* Header */}
-        <div className="mb-8">
+        <div className="mb-6">
           <h1 className="text-3xl font-extrabold text-foreground tracking-tight">Settings</h1>
           <p className="text-muted-foreground mt-1 text-sm">Configure your dialer application preferences.</p>
         </div>
@@ -69,21 +69,21 @@ export default function SettingsPage() {
               Security
             </h3>
             <div className="space-y-4">
-              <div className="flex items-center justify-between">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                 <div>
                   <p className="text-sm font-medium text-foreground">Auth Token</p>
                   <p className="text-xs text-muted-foreground mt-0.5">Your current session token.</p>
                 </div>
-                <span className="text-xs font-mono text-muted-foreground bg-muted px-3 py-1 rounded-lg">
+                <span className="text-xs font-mono text-muted-foreground bg-muted px-3 py-1 rounded-lg self-start sm:self-auto truncate max-w-full">
                   {localStorage.getItem('token') ? '••••••••' + localStorage.getItem('token').slice(-8) : 'Not logged in'}
                 </span>
               </div>
-              <div className="flex items-center justify-between">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                 <div>
                   <p className="text-sm font-medium text-foreground">WebSocket</p>
                   <p className="text-xs text-muted-foreground mt-0.5">Manual call audio bridge endpoint.</p>
                 </div>
-                <span className="text-xs font-mono text-muted-foreground bg-muted px-3 py-1 rounded-lg">
+                <span className="text-xs font-mono text-muted-foreground bg-muted px-3 py-1 rounded-lg self-start sm:self-auto truncate max-w-full">
                   ws://localhost:3000/ws/manual-call
                 </span>
               </div>

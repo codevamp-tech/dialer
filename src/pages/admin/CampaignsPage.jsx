@@ -178,17 +178,17 @@ export default function CampaignsPage() {
   return (
     <div className="flex-1 overflow-auto bg-background/50 relative">
       <div className="absolute inset-0 bg-grid opacity-15 pointer-events-none" />
-      <div className="p-8 relative z-10 max-w-7xl mx-auto">
+      <div className="p-4 md:p-8 relative z-10 max-w-7xl mx-auto">
         {/* Header */}
-        <div className="flex items-center justify-between mb-6">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
           <div>
-            <h1 className="text-3xl font-extrabold text-foreground tracking-tight">Campaigns</h1>
+            <h1 className="text-2xl md:text-3xl font-extrabold text-foreground tracking-tight">Campaigns</h1>
             <p className="text-muted-foreground mt-1 text-sm">Manage your outbound calling campaigns.</p>
           </div>
           <button
             id="btn-create-campaign"
             onClick={() => setShowCreateModal(true)}
-            className="bg-primary text-primary-foreground px-5 py-2.5 rounded-xl text-sm font-bold hover:opacity-90 transition shadow-lg shadow-primary/25 flex items-center gap-2 transform hover:-translate-y-0.5 active:translate-y-0"
+            className="w-full sm:w-auto bg-primary text-primary-foreground px-5 py-2.5 rounded-xl text-sm font-bold hover:opacity-90 transition shadow-lg shadow-primary/25 flex items-center justify-center gap-2 transform hover:-translate-y-0.5 active:translate-y-0"
           >
             <Plus className="w-4 h-4" /> New Campaign
           </button>

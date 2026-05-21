@@ -66,10 +66,10 @@ export default function DashboardPage() {
   return (
     <div className="flex-1 overflow-auto bg-background/50 relative">
       <div className="absolute inset-0 bg-grid opacity-15 pointer-events-none" />
-      <div className="p-8 relative z-10 max-w-7xl mx-auto">
+      <div className="p-4 md:p-8 relative z-10 max-w-7xl mx-auto">
         {/* Header */}
         <div className="mb-8">
-          <h1 className="text-3xl font-extrabold text-foreground tracking-tight">Dashboard</h1>
+          <h1 className="text-2xl md:text-3xl font-extrabold text-foreground tracking-tight">Dashboard</h1>
           <p className="text-muted-foreground mt-1 text-sm">Overview of your call center performance.</p>
         </div>
 

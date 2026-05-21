@@ -26,7 +26,7 @@ export default function HomePage() {
       <div className="relative z-10 flex justify-between items-center px-6 py-4">
         <div className="flex items-center gap-2 text-primary font-bold text-sm">
           <Phone className="w-5 h-5" />
-          DialerPro
+          Vani Dialer
         </div>
         <ThemeToggle />
       </div>
@@ -36,7 +36,7 @@ export default function HomePage() {
         <div className="text-center space-y-6 max-w-3xl mb-12 animate-fade-in">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 text-primary text-xs font-bold tracking-widest uppercase border border-primary/20">
             <Zap className="w-3.5 h-3.5" />
-            Next-Gen Dialer Platform
+            Vani Dialer Platform
           </div>
 
           <h1 className="text-5xl md:text-7xl font-black tracking-tighter text-foreground leading-[1.05]">
@@ -99,7 +99,7 @@ export default function HomePage() {
 
       {/* Footer */}
       <div className="relative z-10 text-center py-6 text-xs text-muted-foreground">
-        © 2026 DialerPro. Built for scale.
+        © 2026 Vani Dialer. Built for scale.
       </div>
     </div>
   );

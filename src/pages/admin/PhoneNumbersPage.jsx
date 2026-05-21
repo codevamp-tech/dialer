@@ -80,17 +80,17 @@ export default function PhoneNumbersPage() {
   return (
     <div className="flex-1 overflow-auto bg-background/50 relative">
       <div className="absolute inset-0 bg-grid opacity-15 pointer-events-none" />
-      <div className="p-8 relative z-10 max-w-7xl mx-auto">
+      <div className="p-4 md:p-8 relative z-10 max-w-7xl mx-auto">
 
         {/* Header */}
-        <div className="flex justify-between items-end mb-6">
+        <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 mb-6">
           <div>
             <h1 className="text-3xl font-extrabold text-foreground tracking-tight">Phone Numbers</h1>
             <p className="text-muted-foreground mt-1 text-sm">Manage SIP trunk lines used for outbound dialing.</p>
           </div>
           <button
             onClick={() => setIsModalOpen(true)}
-            className="bg-primary text-primary-foreground px-4 py-2.5 rounded-xl font-bold text-sm hover:opacity-90 transition shadow-lg shadow-primary/25 flex items-center gap-2"
+            className="w-full sm:w-auto justify-center bg-primary text-primary-foreground px-4 py-2.5 rounded-xl font-bold text-sm hover:opacity-90 transition shadow-lg shadow-primary/25 flex items-center gap-2"
           >
             <Plus className="w-4 h-4" /> Add SIP Trunk
           </button>
@@ -99,12 +99,12 @@ export default function PhoneNumbersPage() {
         {/* Add SIP Trunk Modal */}
         <Modal isOpen={isModalOpen} title="Add SIP Trunk" onClose={() => setIsModalOpen(false)}>
           <form onSubmit={handleCreate} className="space-y-4">
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {field('Display Name', 'name', 'text', 'e.g. Twilio Main Line')}
               {field('Phone Number (E.164)', 'number', 'tel', '+918267818161')}
             </div>
-            <div className="grid grid-cols-3 gap-4">
-              <div className="col-span-2">{field('SIP Server / Host', 'serverIp', 'text', 'vani-outbound.pstn.twilio.com')}</div>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              <div className="col-span-1 sm:col-span-2">{field('SIP Server / Host', 'serverIp', 'text', 'vani-outbound.pstn.twilio.com')}</div>
               {field('Port', 'port', 'number', '5060')}
             </div>
 
@@ -112,7 +112,7 @@ export default function PhoneNumbersPage() {
               <p className="text-xs font-bold text-muted-foreground uppercase tracking-wider mb-3 flex items-center gap-1.5">
                 <Shield className="w-3.5 h-3.5" /> SIP Identity Credentials
               </p>
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {field('SIP Username', 'username', 'text', 'your-sip-username')}
                 {field('SIP Password', 'password', 'password', '••••••••')}
               </div>
@@ -122,7 +122,7 @@ export default function PhoneNumbersPage() {
               <p className="text-xs font-bold text-muted-foreground uppercase tracking-wider mb-1 flex items-center gap-1.5">
                 <Shield className="w-3.5 h-3.5" /> Digest Auth Credentials <span className="text-[10px] normal-case font-normal">(Twilio Credential List — leave blank to reuse above)</span>
               </p>
-              <div className="grid grid-cols-2 gap-4 mt-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-3">
                 {field('Auth Username', 'authUsername', 'text', 'Optional')}
                 {field('Auth Password', 'authPassword', 'password', 'Optional')}
               </div>

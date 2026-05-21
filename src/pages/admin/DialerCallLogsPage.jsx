@@ -48,10 +48,10 @@ export default function DialerCallLogsPage() {
   return (
     <div className="flex-1 overflow-auto bg-background/50 relative">
       <div className="absolute inset-0 bg-grid opacity-15 pointer-events-none" />
-      <div className="p-8 relative z-10 max-w-7xl mx-auto">
+      <div className="p-4 md:p-8 relative z-10 max-w-7xl mx-auto">
 
         {/* Header */}
-        <div className="flex justify-between items-end mb-6">
+        <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 mb-6">
           <div>
             <h1 className="text-3xl font-extrabold text-foreground tracking-tight">Dialer Call Logs</h1>
             <p className="text-muted-foreground mt-1 text-sm">
@@ -62,7 +62,7 @@ export default function DialerCallLogsPage() {
           </div>
 
           {/* Filters */}
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 self-start sm:self-auto">
             <Filter className="w-4 h-4 text-muted-foreground" />
             <select
               value={filters.disposition}

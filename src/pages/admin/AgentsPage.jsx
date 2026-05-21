@@ -41,17 +41,17 @@ export default function AgentsPage() {
   return (
     <div className="flex-1 overflow-auto bg-background/50 relative">
       <div className="absolute inset-0 bg-grid opacity-15 pointer-events-none" />
-      <div className="p-8 relative z-10 max-w-7xl mx-auto">
+      <div className="p-4 md:p-8 relative z-10 max-w-7xl mx-auto">
 
         {/* Header */}
-        <div className="flex justify-between items-end mb-6">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
           <div>
-            <h1 className="text-3xl font-extrabold text-foreground tracking-tight">Human Agents</h1>
+            <h1 className="text-2xl md:text-3xl font-extrabold text-foreground tracking-tight">Human Agents</h1>
             <p className="text-muted-foreground mt-1 text-sm">Manage human agent accounts that can log into the dialer.</p>
           </div>
           <button
             onClick={() => setIsModalOpen(true)}
-            className="bg-primary text-primary-foreground px-4 py-2.5 rounded-xl font-bold text-sm hover:opacity-90 transition shadow-lg shadow-primary/25 flex items-center gap-2"
+            className="w-full sm:w-auto bg-primary text-primary-foreground px-4 py-2.5 rounded-xl font-bold text-sm hover:opacity-90 transition shadow-lg shadow-primary/25 flex items-center justify-center gap-2"
           >
             <UserPlus className="w-4 h-4" /> Add Human Agent
           </button>

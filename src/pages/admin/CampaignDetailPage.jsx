@@ -113,7 +113,7 @@ export default function CampaignDetailPage() {
   return (
     <div className="flex-1 overflow-auto bg-background/50 relative">
       <div className="absolute inset-0 bg-grid opacity-15 pointer-events-none" />
-      <div className="p-8 relative z-10 max-w-7xl mx-auto">
+      <div className="p-4 md:p-8 relative z-10 max-w-7xl mx-auto">
         {/* Back link */}
         <Link
           to="/admin/campaigns"
@@ -123,31 +123,31 @@ export default function CampaignDetailPage() {
         </Link>
 
         {/* Campaign header */}
-        <div className="bg-card border border-border rounded-xl p-6 mb-6">
-          <div className="flex items-start justify-between">
+        <div className="bg-card border border-border rounded-xl p-4 md:p-6 mb-6">
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
             <div className="flex items-center gap-4">
-              <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
+              <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
                 <Target className="w-6 h-6 text-primary" />
               </div>
               <div>
-                <div className="flex items-center gap-2.5">
-                  <h1 className="text-2xl font-bold text-foreground">{campaign.name}</h1>
+                <div className="flex flex-wrap items-center gap-2">
+                  <h1 className="text-xl md:text-2xl font-bold text-foreground">{campaign.name}</h1>
                   <Badge variant={statusVariants[campaign.status] || 'default'} dot>
                     {campaign.status}
                   </Badge>
                 </div>
-                <p className="text-sm text-muted-foreground mt-1">
+                <p className="text-xs md:text-sm text-muted-foreground mt-1">
                   Created {new Date(campaign.createdAt).toLocaleDateString('en-US', { dateStyle: 'medium' })}
                 </p>
               </div>
             </div>
 
-            <div className="flex items-center gap-2">
+            <div className="flex flex-wrap items-center gap-2">
               {campaign.status === 'running' && (
                 <button
                   onClick={() => handleControl('pause')}
                   disabled={controlling}
-                  className="px-3 py-2 rounded-lg text-sm font-semibold bg-yellow-500/10 text-yellow-600 dark:text-yellow-400 hover:bg-yellow-500/20 transition flex items-center gap-1.5"
+                  className="px-3 py-2 rounded-lg text-xs md:text-sm font-semibold bg-yellow-500/10 text-yellow-600 dark:text-yellow-400 hover:bg-yellow-500/20 transition flex items-center gap-1.5"
                 >
                   <Pause className="w-3.5 h-3.5" /> Pause
                 </button>
@@ -156,7 +156,7 @@ export default function CampaignDetailPage() {
                 <button
                   onClick={() => handleControl('resume')}
                   disabled={controlling}
-                  className="px-3 py-2 rounded-lg text-sm font-semibold bg-green-500/10 text-green-600 dark:text-green-400 hover:bg-green-500/20 transition flex items-center gap-1.5"
+                  className="px-3 py-2 rounded-lg text-xs md:text-sm font-semibold bg-green-500/10 text-green-600 dark:text-green-400 hover:bg-green-500/20 transition flex items-center gap-1.5"
                 >
                   <Play className="w-3.5 h-3.5" /> Resume
                 </button>
@@ -165,14 +165,14 @@ export default function CampaignDetailPage() {
                 <button
                   onClick={() => handleControl('cancel')}
                   disabled={controlling}
-                  className="px-3 py-2 rounded-lg text-sm font-semibold bg-red-500/10 text-red-600 dark:text-red-400 hover:bg-red-500/20 transition flex items-center gap-1.5"
+                  className="px-3 py-2 rounded-lg text-xs md:text-sm font-semibold bg-red-500/10 text-red-600 dark:text-red-400 hover:bg-red-500/20 transition flex items-center gap-1.5"
                 >
                   <XCircle className="w-3.5 h-3.5" /> Cancel
                 </button>
               )}
               <button
                 onClick={handleExport}
-                className="px-3 py-2 rounded-lg text-sm font-semibold bg-secondary text-secondary-foreground hover:bg-secondary/80 transition flex items-center gap-1.5"
+                className="px-3 py-2 rounded-lg text-xs md:text-sm font-semibold bg-secondary text-secondary-foreground hover:bg-secondary/80 transition flex items-center gap-1.5"
               >
                 <Download className="w-3.5 h-3.5" /> Export CSV
               </button>
@@ -194,22 +194,22 @@ export default function CampaignDetailPage() {
           </div>
 
           {/* Stats row */}
-          <div className="grid grid-cols-4 gap-4 mt-5">
-            <div className="bg-muted/50 rounded-lg px-4 py-3 text-center">
-              <p className="text-2xl font-black text-foreground">{campaign.totalLeads}</p>
-              <p className="text-xs text-muted-foreground font-medium">Total</p>
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 md:gap-4 mt-5">
+            <div className="bg-muted/50 rounded-lg px-3 py-2.5 md:px-4 md:py-3 text-center">
+              <p className="text-xl md:text-2xl font-black text-foreground">{campaign.totalLeads}</p>
+              <p className="text-[10px] md:text-xs text-muted-foreground font-medium">Total</p>
             </div>
-            <div className="bg-green-500/5 rounded-lg px-4 py-3 text-center">
-              <p className="text-2xl font-black text-green-600 dark:text-green-400">{campaign.completedLeads || 0}</p>
-              <p className="text-xs text-muted-foreground font-medium">Completed</p>
+            <div className="bg-green-500/5 rounded-lg px-3 py-2.5 md:px-4 md:py-3 text-center">
+              <p className="text-xl md:text-2xl font-black text-green-600 dark:text-green-400">{campaign.completedLeads || 0}</p>
+              <p className="text-[10px] md:text-xs text-muted-foreground font-medium">Completed</p>
             </div>
-            <div className="bg-red-500/5 rounded-lg px-4 py-3 text-center">
-              <p className="text-2xl font-black text-red-600 dark:text-red-400">{campaign.failedLeads || 0}</p>
-              <p className="text-xs text-muted-foreground font-medium">Failed</p>
+            <div className="bg-red-500/5 rounded-lg px-3 py-2.5 md:px-4 md:py-3 text-center">
+              <p className="text-xl md:text-2xl font-black text-red-600 dark:text-red-400">{campaign.failedLeads || 0}</p>
+              <p className="text-[10px] md:text-xs text-muted-foreground font-medium">Failed</p>
             </div>
-            <div className="bg-primary/5 rounded-lg px-4 py-3 text-center">
-              <p className="text-2xl font-black text-primary">{campaign.totalLeads - (campaign.completedLeads || 0) - (campaign.failedLeads || 0)}</p>
-              <p className="text-xs text-muted-foreground font-medium">Pending</p>
+            <div className="bg-primary/5 rounded-lg px-3 py-2.5 md:px-4 md:py-3 text-center">
+              <p className="text-xl md:text-2xl font-black text-primary">{campaign.totalLeads - (campaign.completedLeads || 0) - (campaign.failedLeads || 0)}</p>
+              <p className="text-[10px] md:text-xs text-muted-foreground font-medium">Pending</p>
             </div>
           </div>
         </div>
